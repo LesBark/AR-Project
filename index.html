@@ -18,6 +18,9 @@
 </head>
 <body>
 
+    <h1>Parallel and distributed computing: Parallel scheme of adding</h1>
+    <p>You can spin the animation or press the AR button to see it on your desk.</p>
+
     <model-viewer 
         id="ar-model"
         src="cascade_sum.glb" 
@@ -37,12 +40,12 @@
     <script>
         const modelViewer = document.querySelector('#ar-model');
 
-        // Гарантує, що анімація почнеться одразу після завантаження моделі
+        // Гарантує запуск, коли модель завантажена
         modelViewer.addEventListener('load', () => {
             modelViewer.play();
         });
 
-        // Забезпечує повторний запуск, якщо AR-режим активується
+        // Гарантує запуск, коли AR-сесія починається
         modelViewer.addEventListener('ar-status', (event) => {
             if (event.detail.status === 'tracking') {
                 modelViewer.play();
