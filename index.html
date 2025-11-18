@@ -1,39 +1,57 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR: Каскадна сума</title>
-    
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    
-    <style>
-        body { font-family: sans-serif; text-align: center; }
-        model-viewer {
-            width: 90%;
-            height: 400px;
-            margin: auto;
-            border: 1px solid #ccc;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR: Каскадна сума (Фінал)</title>
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    
+    <style>
+        body { font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
+        model-viewer {
+            width: 100vw;
+            height: 100vh;
+            /* Збільшено розмір для кращого AR досвіду */
+            display: block; 
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Parallel and distributed computing: Parallel scheme of adding</h1>
-    <p>You can spin the animation or press the AR button to see it on your desk.</p>
+    <model-viewer 
+        id="ar-model"
+        src="cascade_sum.glb" 
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        camera-controls 
+        autoplay
+        loop 
+        animation-name="Scene"
+        alt="Array cascade addition animation">
+        
+        <div slot="poster" style="background: #222; color: white;">
+            Модель завантажується...
+        </div>
+    </model-viewer>
 
-    <model-viewer src="cascade_sum.glb" 
-                  ar 
-                  camera-controls 
-                  autoplay
-                    loop                   ar-modes="webxr scene-viewer quick-look"
-                  alt="Array cascade addition animation">
-                  
-        <div slot="poster">
-            Model loading...
-        </div>
-    </model-viewer>
+    <script>
+        const modelViewer = document.querySelector('#ar-model');
+
+        // Гарантує, що анімація почнеться одразу після завантаження моделі
+        modelViewer.addEventListener('load', () => {
+            console.log("Model Loaded, trying to play animation...");
+            modelViewer.play();
+        });
+
+        // Цей обробник спробує запустити анімацію, як тільки AR-сесія запрацює
+        modelViewer.addEventListener('ar-status', (event) => {
+            if (event.detail.status === 'tracking') {
+                console.log("AR Tracking started, forcing animation play.");
+                modelViewer.play();
+            }
+        });
+    </script>
 
 </body>
-
 </html>
