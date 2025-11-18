@@ -12,7 +12,6 @@
         model-viewer {
             width: 100vw;
             height: 100vh;
-            /* Збільшено розмір для кращого AR досвіду */
             display: block; 
         }
     </style>
@@ -38,16 +37,12 @@
     <script>
         const modelViewer = document.querySelector('#ar-model');
 
-        // Гарантує, що анімація почнеться одразу після завантаження моделі
         modelViewer.addEventListener('load', () => {
-            console.log("Model Loaded, trying to play animation...");
             modelViewer.play();
         });
 
-        // Цей обробник спробує запустити анімацію, як тільки AR-сесія запрацює
         modelViewer.addEventListener('ar-status', (event) => {
             if (event.detail.status === 'tracking') {
-                console.log("AR Tracking started, forcing animation play.");
                 modelViewer.play();
             }
         });
