@@ -37,10 +37,12 @@
     <script>
         const modelViewer = document.querySelector('#ar-model');
 
+        // Гарантує, що анімація почнеться одразу після завантаження моделі
         modelViewer.addEventListener('load', () => {
             modelViewer.play();
         });
 
+        // Забезпечує повторний запуск, якщо AR-режим активується
         modelViewer.addEventListener('ar-status', (event) => {
             if (event.detail.status === 'tracking') {
                 modelViewer.play();
