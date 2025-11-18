@@ -9,7 +9,7 @@
     
     <style>
         body { font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
-        /* Важливо: model-viewer займає весь екран */
+        /* Важливо: model-viewer займає весь екран і відображає AR-кнопку */
         model-viewer {
             width: 100vw;
             height: 100vh;
@@ -25,6 +25,7 @@
             background-color: rgba(255, 255, 255, 0.7); /* Напівпрозорий фон для видимості */
             padding: 5px;
             z-index: 1000; /* ГАРАНТІЯ: Текст буде поверх 3D-моделі */
+            text-align: center;
         }
         h1 {
             top: 10px;
@@ -60,7 +61,7 @@
     <script>
         const modelViewer = document.querySelector('#ar-model');
 
-        // Гарантує запуск анімації
+        // Гарантує запуск анімації після завантаження
         modelViewer.addEventListener('load', () => {
             modelViewer.play();
         });
