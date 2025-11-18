@@ -1,40 +1,39 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AR: Каскадна сума</title>
-    
-    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
-    
-    <style>
-        body { font-family: sans-serif; text-align: center; }
-        model-viewer {
-            width: 90%;
-            height: 400px;
-            margin: auto;
-            border: 1px solid #ccc;
-        }
-    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AR: Каскадна сума</title>
+    
+    <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.5.0/model-viewer.min.js"></script>
+    
+    <style>
+        body { font-family: sans-serif; text-align: center; }
+        model-viewer {
+            width: 90%;
+            height: 400px;
+            margin: auto;
+            border: 1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
 
-    <h1>Parallel and distributed computing: Parallel scheme of adding</h1>
-    <p>You can spin the animation or press the AR button to see it on your desk.</p>
+    <h1>Parallel and distributed computing: Parallel scheme of adding</h1>
+    <p>You can spin the animation or press the AR button to see it on your desk.</p>
 
-    <model-viewer src="cascade_sum.glb" 
-                  ar 
-                  camera-controls 
-                  autoplay
-                  ar-modes="webxr scene-viewer quick-look"
-                  alt="Array cascade addition animation">
-                  
-        <div slot="poster">
-            Model loading...
-        </div>
-    </model-viewer>
+    <model-viewer src="cascade_sum.glb" 
+                  ar 
+                  camera-controls 
+                  autoplay
+                    loop                   ar-modes="webxr scene-viewer quick-look"
+                  alt="Array cascade addition animation">
+                  
+        <div slot="poster">
+            Model loading...
+        </div>
+    </model-viewer>
 
 </body>
 
 </html>
-
