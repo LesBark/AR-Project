@@ -9,23 +9,26 @@
     
     <style>
         body { font-family: sans-serif; text-align: center; margin: 0; padding: 0; }
-        /* Важливо: model-viewer займає весь екран і відображає AR-кнопку */
+        
+        /* ГАРАНТІЯ: model-viewer займає весь екран і відображає AR-кнопку */
         model-viewer {
             width: 100vw;
             height: 100vh;
             display: block; 
         }
-        /* Спеціальні стилі для заголовків, щоб вони були ПОВЕРХ моделі */
+        
+        /* Стилізація заголовків, щоб вони були ПОВЕРХ моделі */
         h1, p {
-            position: absolute; /* Визначає точне місце розташування */
-            width: 90%; /* Обмежує ширину тексту */
+            position: absolute; 
+            width: 90%; 
             left: 50%;
-            transform: translateX(-50%); /* Центрування */
+            transform: translateX(-50%); 
             color: black; 
-            background-color: rgba(255, 255, 255, 0.7); /* Напівпрозорий фон для видимості */
+            background-color: rgba(255, 255, 255, 0.85); /* Трохи непрозорий фон для кращої видимості */
             padding: 5px;
             z-index: 1000; /* ГАРАНТІЯ: Текст буде поверх 3D-моделі */
             text-align: center;
+            border-radius: 5px;
         }
         h1 {
             top: 10px;
@@ -54,7 +57,7 @@
         alt="Array cascade addition animation"
         exposure="1.0" 
         shadow-intensity="1"
-        enable-legacy-ar
+        enable-legacy-ar  
     >
         
         <div slot="poster" style="background: #222; color: white;">
