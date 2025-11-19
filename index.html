@@ -5,222 +5,97 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AR: Каскадна схема додавання</title>
     
-    <!-- Model Viewer для AR -->
     <script type="module" src="https://unpkg.com/@google/model-viewer@3.5.0/dist/model-viewer.min.js"></script>
     
     <style>
-        * {
+        body {
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
         }
         
         .container {
             max-width: 1200px;
-            width: 100%;
-            text-align: center;
+            margin: 0 auto;
+            padding: 20px;
         }
         
         .header {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
-            backdrop-filter: blur(10px);
+            background: rgba(255,255,255,0.95);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         
         h1 {
             color: #333;
-            font-size: 2.2em;
-            margin-bottom: 10px;
-            font-weight: 700;
+            margin: 0 0 10px 0;
         }
         
         .subtitle {
             color: #666;
-            font-size: 1.2em;
-            margin-bottom: 20px;
-            line-height: 1.5;
-        }
-        
-        .model-container {
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            margin-bottom: 25px;
-            backdrop-filter: blur(10px);
+            margin: 0;
         }
         
         model-viewer {
             width: 100%;
             height: 500px;
+            background: white;
             border-radius: 15px;
-            overflow: hidden;
-            --poster-color: transparent;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
         }
         
         .controls {
             display: flex;
-            gap: 15px;
             justify-content: center;
-            flex-wrap: wrap;
+            gap: 15px;
             margin: 20px 0;
+            flex-wrap: wrap;
         }
         
-        .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+        button {
+            background: #007bff;
             color: white;
             border: none;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-size: 16px;
-            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 25px;
             cursor: pointer;
+            font-size: 16px;
             transition: all 0.3s ease;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            min-width: 200px;
-            justify-content: center;
         }
         
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        button:hover {
+            background: #0056b3;
+            transform: translateY(-2px);
         }
         
-        .btn:active {
-            transform: translateY(-1px);
+        .ar-button {
+            background: #28a745;
         }
         
-        .btn-ar {
-            background: linear-gradient(135deg, #00b09b, #96c93d);
-            font-size: 18px;
-            padding: 18px 35px;
-        }
-        
-        .btn-play {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a24);
-        }
-        
-        .btn-reset {
-            background: linear-gradient(135deg, #a8e6cf, #56ab2f);
+        .ar-button:hover {
+            background: #1e7e34;
         }
         
         .instructions {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 25px;
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
             border-radius: 15px;
             margin-top: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
-        .instructions h3 {
-            color: #333;
-            margin-bottom: 15px;
-            font-size: 1.4em;
-        }
-        
-        .steps {
-            text-align: left;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 15px;
-            padding: 10px;
-            background: rgba(103, 126, 234, 0.1);
-            border-radius: 10px;
-        }
-        
-        .step-number {
-            background: #667eea;
-            color: white;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-right: 15px;
-            flex-shrink: 0;
-        }
-        
-        .step-text {
-            color: #555;
-            line-height: 1.5;
-        }
-        
-        .ar-hint {
-            background: #fff3cd;
-            border: 1px solid #ffeaa7;
-            color: #856404;
-            padding: 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            font-weight: 500;
-        }
-        
-        /* Адаптивність для мобільних пристроїв */
         @media (max-width: 768px) {
-            h1 {
-                font-size: 1.8em;
-            }
-            
-            .subtitle {
-                font-size: 1.1em;
-            }
-            
             model-viewer {
                 height: 400px;
             }
             
-            .btn {
-                min-width: 160px;
-                padding: 12px 20px;
+            button {
+                padding: 10px 20px;
                 font-size: 14px;
-            }
-            
-            .btn-ar {
-                font-size: 16px;
-                padding: 15px 25px;
-            }
-            
-            .controls {
-                flex-direction: column;
-                align-items: center;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 1.5em;
-            }
-            
-            .header {
-                padding: 20px 15px;
-            }
-            
-            model-viewer {
-                height: 350px;
             }
         }
     </style>
@@ -229,190 +104,86 @@
     <div class="container">
         <div class="header">
             <h1>🔢 Каскадна схема паралельного додавання</h1>
-            <p class="subtitle">Візуалізація алгоритму паралельного обчислення суми масиву чисел</p>
+            <p class="subtitle">Анімація алгоритму з кольоровими цифрами</p>
         </div>
         
-        <div class="model-container">
-            <model-viewer 
-                id="ar-model"
-                src="cascade_sum.glb"
-                ar
-                ar-modes="webxr scene-viewer quick-look"
-                camera-controls
-                autoplay
-                loop
-                animation-name="Animation"
-                alt="3D анімація каскадної схеми додавання"
-                exposure="1.2"
-                shadow-intensity="1.2"
-                environment-image="neutral"
-                auto-rotate
-                rotation-per-second="30deg"
-                ar-scale="fixed"
-                ar-placement="wall"
-                xr-environment
-            >
-                <!-- Стандартна кнопка AR -->
-                <button slot="ar-button" class="btn btn-ar" id="native-ar-button">
-                    🚀 Запустити в AR
-                </button>
-                
-                <div class="controls" slot="poster">
-                    <button class="btn btn-play" onclick="playAnimation()">
-                        ▶️ Відтворити анімацію
-                    </button>
-                    <button class="btn" onclick="pauseAnimation()">
-                        ⏸️ Пауза
-                    </button>
-                    <button class="btn btn-reset" onclick="resetAnimation()">
-                        🔄 Почати спочатку
-                    </button>
-                </div>
-            </model-viewer>
+        <model-viewer 
+            id="ar-model"
+            src="cascade_sum.glb"
+            ar
+            ar-modes="webxr scene-viewer quick-look"
+            camera-controls
+            autoplay
+            auto-rotate
+            animation-name="AllAnimations"
+            alt="3D анімація каскадної схеми додавання"
+            exposure="1.5"
+            shadow-intensity="1.5"
+            environment-image="neutral"
+            ar-scale="fixed"
+        >
+            <button slot="ar-button" class="ar-button">
+                👁️ Переглянути в AR
+            </button>
             
-            <!-- Додаткові керуючі кнопки -->
-            <div class="controls">
-                <button class="btn btn-ar" onclick="activateAR()">
-                    📱 Проектувати на стіну (AR)
-                </button>
-                <button class="btn" onclick="rotateModel()">
-                    🔄 Обертати модель
-                </button>
+            <div class="controls" slot="poster">
+                <button onclick="playAnimation()">▶️ Грати</button>
+                <button onclick="pauseAnimation()">⏸️ Пауза</button>
+                <button onclick="resetAnimation()">🔄 Скинути</button>
             </div>
+        </model-viewer>
+        
+        <div class="controls">
+            <button class="ar-button" onclick="activateAR()">
+                📱 Проектувати на стіну
+            </button>
         </div>
         
         <div class="instructions">
-            <h3>📖 Як використовувати AR режим:</h3>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-text">Натисніть кнопку "Проектувати на стіну (AR)"</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-text">Дозвольте доступ до камери вашого пристрою</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-text">Наведіть камеру на плоску поверхню (стіну, стіл, підлогу)</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-text">Тапніть на екрані, щоб розмістити 3D-анімацію</div>
-                </div>
-                <div class="step">
-                    <div class="step-number">5</div>
-                    <div class="step-text">Переміщуйтеся навколо, щоб побачити анімацію з різних ракурсів</div>
-                </div>
-            </div>
-            
-            <div class="ar-hint">
-                💡 Порада: Для кращого досвіду використовуйте добре освітлене приміщення та рівні поверхні
-            </div>
+            <h3>Інструкція:</h3>
+            <p>• Натисніть "Грати" для перегляду анімації</p>
+            <p>• Використовуйте мишу для обертання камери</p>
+            <p>• Натисніть "Проектувати на стіну" для AR-режиму</p>
+            <p>• Кольорові цифри показують процес додавання</p>
         </div>
     </div>
 
     <script>
         const modelViewer = document.querySelector('#ar-model');
-        let isRotating = true;
-
-        // Функції керування анімацією
+        
         function playAnimation() {
             modelViewer.play();
-            showNotification('Анімація запущена');
+            console.log('Анімація запущена');
         }
-
+        
         function pauseAnimation() {
             modelViewer.pause();
-            showNotification('Анімація призупинена');
+            console.log('Анімація призупинена');
         }
-
+        
         function resetAnimation() {
             modelViewer.currentTime = 0;
             modelViewer.play();
-            showNotification('Анімація перезапущена');
+            console.log('Анімація скинута');
         }
-
+        
         function activateAR() {
-            try {
-                // Спроба активувати AR через WebXR
-                if (modelViewer.activateAR) {
-                    modelViewer.activateAR();
-                    showNotification('AR режим активовано! Наведіть камеру на стіну.');
-                } else {
-                    // Fallback - використання вбудованої кнопки AR
-                    document.getElementById('native-ar-button').click();
-                }
-            } catch (error) {
-                console.error('Помилка активації AR:', error);
-                showNotification('Помилка активації AR. Спробуйте іншу кнопку.');
+            if (modelViewer.activateAR) {
+                modelViewer.activateAR();
             }
         }
-
-        function rotateModel() {
-            isRotating = !isRotating;
-            modelViewer.autoRotate = isRotating;
-            showNotification(isRotating ? 'Автообертання увімкнено' : 'Автообертання вимкнено');
-        }
-
-        function showNotification(message) {
-            // Створення сповіщення
-            const notification = document.createElement('div');
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: rgba(0, 0, 0, 0.8);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 10px;
-                z-index: 10000;
-                font-weight: 500;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                transition: all 0.3s ease;
-            `;
-            notification.textContent = message;
-            document.body.appendChild(notification);
-
-            // Автоматичне видалення сповіщення
-            setTimeout(() => {
-                notification.style.opacity = '0';
-                notification.style.transform = 'translateX(100px)';
-                setTimeout(() => {
-                    document.body.removeChild(notification);
-                }, 300);
-            }, 3000);
-        }
-
-        // Обробники подій
+        
+        // Автозапуск анімації
         modelViewer.addEventListener('load', () => {
-            console.log('3D модель успішно завантажена');
-            showNotification('Модель завантажена! Готово до AR перегляду.');
-        });
-
-        modelViewer.addEventListener('ar-status', (event) => {
-            console.log('AR статус:', event.detail.status);
-            if (event.detail.status === 'session-started') {
-                showNotification('AR сесія запущена! Знайдіть поверхню для проекції.');
-            }
-        });
-
-        modelViewer.addEventListener('error', (event) => {
-            console.error('Помилка завантаження моделі:', event.detail);
-            showNotification('Помилка завантаження моделі. Перевірте підключення.');
-        });
-
-        // Перевірка підтримки AR
-        if (!modelViewer.canActivateAR) {
-            console.warn('AR не підтримується на цьому пристрої');
-            // Можна додати повідомлення для користувача
-        }
-
-        // Автозапуск анімації при завантаженні
-        window.addEventListener('load', () => {
+            console.log('Модель завантажена');
             setTimeout(() => {
                 playAnimation();
             }, 1000);
+        });
+        
+        // Обробка помилок
+        modelViewer.addEventListener('error', (event) => {
+            console.error('Помилка:', event.detail);
         });
     </script>
 </body>
